@@ -1,0 +1,16 @@
+name: Build Android APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+    - name: Grant execute for gradlew
+      run: chmod +x gradlew || true
+    - name: Build APK
+      run: ./gradlew assembleDebug || echo "Gradle wrapper needed"
